@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Eaddie</string>
+    <string name="add_task">Add task</string>
+    <string name="task_hint">What do you need to do?</string>
+    <string name="time_hint">15m</string>
+    <string name="start">Start</string>
+    <string name="pause">Pause</string>
+    <string name="resume">Resume</string>
+    <string name="complete">Complete</string>
+    <string name="delete">Delete</string>
+    <string name="skip">Skip</string>
+    <string name="time_up">Time\'s up!</string>
+    <string name="task_completed">Task completed</string>
+    <string name="focus_mode">Focus Mode</string>
+    <string name="all_tasks">All Tasks</string>
+    <string name="no_tasks">No tasks yet. Add one to get started!</string>
+</resources>
