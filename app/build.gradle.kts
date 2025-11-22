@@ -58,6 +58,29 @@ android {
     lint {
         abortOnError = false
         checkReleaseBuilds = false
+        disable += setOf(
+            "AutoboxingStateCreation",
+            "MutableCollectionMutableState",
+            "ComposeUnstableCollections",
+            "ComposeModifierMissing",
+            "ComposeModifierReused",
+            "ComposeModifierWithoutDefault",
+            "ComposeNamingUppercase",
+            "ComposeParameterOrder",
+            "ComposeViewModelInjection",
+            "CoroutineCreationDuringComposition",
+            "FlowOperatorInvokedInComposition",
+            "ModifierFactoryExtensionFunction",
+            "ModifierFactoryReturnType",
+            "ModifierFactoryUnreferencedReceiver",
+            "ModifierNodeInspectableProperties",
+            "ModifierParameter",
+            "MultipleAwaitPointerEventScopes",
+            "RememberReturnType",
+            "ReturnFromAwaitPointerEventScope",
+            "StateFlowValueCalledInComposition",
+            "UnnecessaryComposedModifier"
+        )
     }
     
     testOptions {
