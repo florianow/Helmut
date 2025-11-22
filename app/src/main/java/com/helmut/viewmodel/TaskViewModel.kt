@@ -3,7 +3,9 @@ package com.helmut.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.helmut.data.model.Task
+import com.helmut.data.repository.SettingsRepository
 import com.helmut.data.repository.TaskRepository
+import com.helmut.utils.NotificationHelper
 import com.helmut.utils.TimerManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
@@ -19,7 +21,9 @@ data class TaskUiState(
 
 @HiltViewModel
 class TaskViewModel @Inject constructor(
-    private val repository: TaskRepository
+    private val repository: TaskRepository,
+    private val settingsRepository: SettingsRepository,
+    private val notificationHelper: NotificationHelper
 ) : ViewModel() {
 
     val timerManager = TimerManager(viewModelScope)
@@ -81,6 +85,17 @@ class TaskViewModel @Inject constructor(
         _uiState.value = _uiState.value.copy(currentTask = task)
         timerManager.startTimer(task.estimatedMinutes) {
             viewModelScope.launch {
+                val notificationEnabled = settingsRepository.notificationEnabled.first()
+                val vibrationEnabled = settingsRepository.vibrationEnabled.first()
+                val soundUri = settingsRepository.notificationSoundUri.first()
+                
+                if (notificationEnabled) {
+                    notificationHelper.showTimerCompleteNotification(
+                        taskTitle = task.title,
+                        soundUri = soundUri,
+                        enableVibration = vibrationEnabled
+                    )
+                }
             }
         }
     }

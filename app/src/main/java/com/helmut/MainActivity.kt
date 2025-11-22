@@ -15,6 +15,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.helmut.ui.screens.HistoryScreen
+import com.helmut.ui.screens.SettingsScreen
 import com.helmut.ui.screens.TaskListScreen
 import com.helmut.ui.screens.TemplatesScreen
 import com.helmut.ui.theme.HelmutTheme
@@ -45,7 +46,8 @@ fun HelmutApp() {
     val items = listOf(
         NavigationItem("Today", Icons.Default.Today, "today"),
         NavigationItem("Templates", Icons.Default.DocumentScanner, "templates"),
-        NavigationItem("History", Icons.Default.History, "history")
+        NavigationItem("History", Icons.Default.History, "history"),
+        NavigationItem("Settings", Icons.Default.Settings, "settings")
     )
 
     Scaffold(
@@ -77,6 +79,7 @@ fun HelmutApp() {
             composable("today") { TaskListScreen() }
             composable("templates") { TemplatesScreen() }
             composable("history") { HistoryScreen() }
+            composable("settings") { SettingsScreen() }
         }
     }
 }

@@ -1,18 +1,44 @@
-# Helmut
+<div align="center">
+  <img src="logo.png" alt="Helmut Logo" width="120" height="120">
+  <h1>Helmut</h1>
+  <p><strong>Time-boxed task management for focused productivity</strong></p>
+  <p>
+    <a href="#features">Features</a> •
+    <a href="#getting-started">Getting Started</a> •
+    <a href="#project-structure">Project Structure</a> •
+    <a href="#contributing">Contributing</a> •
+    <a href="#license">License</a>
+  </p>
+  <p>
+    <img src="https://img.shields.io/badge/Android-8.0%2B-green?logo=android" alt="Android 8.0+">
+    <img src="https://img.shields.io/badge/Kotlin-1.9-blue?logo=kotlin" alt="Kotlin">
+    <img src="https://img.shields.io/badge/License-MIT-yellow" alt="MIT License">
+  </p>
+</div>
+
+---
+
+## About
 
 An open-source Android time-boxed task management app inspired by LlamaLife. Built with Kotlin, Jetpack Compose, and modern Android architecture.
 
+Helmut helps you focus on one task at a time with visual countdown timers, customizable alerts, and reusable task templates.
+
 ## Features
 
-- ✅ Create tasks with time estimates
-- ⏱️ Focus mode with visual countdown timer
-- ⏸️ Pause/resume timers
-- ✔️ Complete or skip tasks
+- ✅ **Time-boxed Tasks** - Create tasks with time estimates
+- ⏱️ **Focus Mode** - Visual countdown timer with pause/resume
+- 🔔 **Smart Alerts** - Customizable notifications, sounds, and vibration when tasks complete
 - 📋 **Task Templates** - Create reusable task sets (e.g., "Morning Routine", "Deep Work Session")
 - 📊 **History & Stats** - View completed tasks, track focus time, and maintain streaks
-- 🧭 **Multi-screen Navigation** - Bottom nav bar for Today/Templates/History
-- 📱 Clean Material Design 3 UI
-- 💾 Local database persistence with Room
+- ⚙️ **Settings** - Configure notification sound, vibration, and alert preferences
+- 🧭 **Multi-screen Navigation** - Bottom nav bar for Today/Templates/History/Settings
+- 📱 **Material Design 3** - Clean, modern UI built with Jetpack Compose
+- 💾 **Offline-first** - Local database persistence with Room
+
+## Screenshots
+
+> 📸 *Screenshots coming soon! Install the app to see it in action.*
 
 ## Tech Stack
 
@@ -21,7 +47,9 @@ An open-source Android time-boxed task management app inspired by LlamaLife. Bui
 - **Architecture**: MVVM (Model-View-ViewModel)
 - **Dependency Injection**: Hilt
 - **Database**: Room
+- **Data Storage**: DataStore (for user preferences)
 - **Navigation**: Jetpack Navigation Compose
+- **Notifications**: Android Notification API with custom sounds & vibration
 - **Asynchronous**: Kotlin Coroutines & Flow
 - **Build**: Gradle (Kotlin DSL)
 
@@ -122,7 +150,8 @@ app/src/main/java/com/helmut/
 │   │   └── TemplateWithTasks.kt # Relation model
 │   └── repository/     # Data layer
 │       ├── TaskRepository.kt      # Task data operations
-│       └── TemplateRepository.kt  # Template data operations
+│       ├── TemplateRepository.kt  # Template data operations
+│       └── SettingsRepository.kt  # User preferences (DataStore)
 ├── di/                 # Dependency injection
 │   └── DatabaseModule.kt      # Hilt modules
 ├── ui/
@@ -130,14 +159,16 @@ app/src/main/java/com/helmut/
 │   │   ├── TaskListScreen.kt         # Today screen (main task list)
 │   │   ├── TemplatesScreen.kt        # Templates browser
 │   │   ├── CreateTemplateDialog.kt   # Template creation dialog
-│   │   └── HistoryScreen.kt          # Completed tasks & stats
+│   │   ├── HistoryScreen.kt          # Completed tasks & stats
+│   │   └── SettingsScreen.kt         # Alert & notification settings
 │   └── theme/         # Material theming
 ├── utils/             # Utilities
 │   ├── TimerManager.kt       # Timer logic
-│   └── NotificationHelper.kt # Notifications
+│   └── NotificationHelper.kt # Notifications, sounds, vibration
 ├── viewmodel/         # ViewModels
 │   ├── TaskViewModel.kt      # Task business logic
-│   └── TemplateViewModel.kt  # Template business logic
+│   ├── TemplateViewModel.kt  # Template business logic
+│   └── SettingsViewModel.kt  # Settings business logic
 ├── HelmutApplication.kt      # Application class
 └── MainActivity.kt           # Entry point with navigation
 ```
@@ -1110,6 +1141,24 @@ Room.databaseBuilder(...)
     .build()
 ```
 
+#### **Notifications not showing when timer completes**
+
+1. **Check notification permissions:** Go to Settings → Apps → Helmut → Notifications → Enable
+2. **Check in-app settings:** Open Settings tab in the app and ensure "Notifications" toggle is ON
+3. **Battery optimization:** Some Android devices kill background processes. Go to Settings → Battery → Battery Optimization → Helmut → Don't optimize
+
+#### **Vibration not working**
+
+1. **Check Settings tab:** Ensure "Vibration" is enabled in the app
+2. **Check phone settings:** Make sure your phone isn't in silent mode (some devices disable vibration in silent mode)
+3. **Check permissions:** Verify VIBRATE permission in AndroidManifest.xml (already added)
+
+#### **No sound when timer completes**
+
+1. **Check volume:** Make sure notification volume is turned up
+2. **Check Settings tab:** Try selecting a different notification sound (Default/Alarm/Ringtone)
+3. **Do Not Disturb mode:** Turn off DND mode temporarily to test
+
 ---
 
 ### 📚 **Learning Resources**
@@ -1131,6 +1180,8 @@ Room.databaseBuilder(...)
 - [Kotlin Coroutines Guide](https://kotlinlang.org/docs/coroutines-guide.html)
 - [Kotlin Flow Guide](https://kotlinlang.org/docs/flow.html)
 - [Navigation Compose](https://developer.android.com/jetpack/compose/navigation)
+- [DataStore (Preferences)](https://developer.android.com/topic/libraries/architecture/datastore)
+- [Android Notifications](https://developer.android.com/develop/ui/views/notifications)
 
 ---
 
@@ -1160,6 +1211,16 @@ A: Marks a function as "suspendable" - it can pause execution and resume later w
 **Q: What's a `Flow` vs regular `List`?**  
 A: `List` is static data. `Flow` is a stream that can emit multiple values over time. Perfect for live database updates!
 
+**Q: What's DataStore vs SharedPreferences?**  
+A: DataStore is the modern replacement for SharedPreferences. It's type-safe, asynchronous (uses coroutines), handles errors better, and supports Flow for reactive updates.
+
+**Q: How do notifications work in Android?**  
+A: The app uses NotificationCompat to create notifications that work across all Android versions. You need to:
+1. Request POST_NOTIFICATIONS permission (Android 13+)
+2. Create a NotificationChannel (defines importance, sound, vibration)
+3. Build the notification with NotificationCompat.Builder
+4. Display it with NotificationManager
+
 **Q: Why are there so many layers? Seems complicated!**  
 A: Separation of concerns! Each layer has a single responsibility:
 - **Models**: Define data structure
@@ -1184,6 +1245,8 @@ A: Yes! This project is MIT licensed. Feel free to fork, modify, and use it howe
    - Export tasks to CSV
    - Task priority levels
    - Recurring tasks
+   - Custom notification sounds (upload your own)
+   - Widget for quick task access
 3. **Read the official docs** for each technology
 4. **Build your own app** using this as a template
 
@@ -1191,11 +1254,28 @@ A: Yes! This project is MIT licensed. Feel free to fork, modify, and use it howe
 
 ### 🤝 **Contributing**
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+Contributions are welcome! Here's how you can help:
+
+1. **Fork the repository**
+2. **Create a feature branch** (`git checkout -b feature/amazing-feature`)
+3. **Commit your changes** (`git commit -m 'Add amazing feature'`)
+4. **Push to the branch** (`git push origin feature/amazing-feature`)
+5. **Open a Pull Request**
+
+#### Ideas for Contributions
+
+- 📸 Add screenshots to the README
+- 🌙 Implement dark mode toggle
+- 🏷️ Add task categories/tags
+- 📤 Export tasks to CSV
+- 🔁 Recurring tasks support
+- 🎨 More theme customizations
+- 🌍 Internationalization (i18n)
+- 🧪 Write more unit tests
+- 📖 Improve documentation
+- 🐛 Fix bugs and improve performance
+
+Please read our [Code of Conduct](CODE_OF_CONDUCT.md) before contributing (TODO: add this file).
 
 ---
 
