@@ -38,17 +38,10 @@ cd helmut
 ```
 
 2. Open in Android Studio or build from command line:
-
-**Using Android Studio's JDK:**
-```bash
-JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home" ./gradlew clean build
-```
-
-**Or just:**
 ```bash
 ./gradlew assembleDebug
 ```
-(Requires Java/JDK in your PATH)
+(Requires Java/JDK 17+ in your PATH or use Android Studio which bundles JDK)
 
 3. The APK will be at: `app/build/outputs/apk/debug/app-debug.apk`
 
