@@ -8,6 +8,9 @@ import kotlinx.coroutines.flow.Flow
 interface TaskDao {
     @Query("SELECT * FROM tasks WHERE isCompleted = 0 ORDER BY `order` ASC, createdAt ASC")
     fun getActiveTasks(): Flow<List<Task>>
+    
+    @Query("SELECT * FROM tasks WHERE isCompleted = 0 ORDER BY `order` ASC, createdAt ASC")
+    suspend fun getActiveTasksList(): List<Task>
 
     @Query("SELECT * FROM tasks WHERE isCompleted = 1 ORDER BY completedAt DESC")
     fun getCompletedTasks(): Flow<List<Task>>

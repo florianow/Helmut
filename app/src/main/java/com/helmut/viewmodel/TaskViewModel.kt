@@ -12,6 +12,7 @@ import javax.inject.Inject
 
 data class TaskUiState(
     val activeTasks: List<Task> = emptyList(),
+    val completedTasks: List<Task> = emptyList(),
     val currentTask: Task? = null,
     val isLoading: Boolean = false
 )
@@ -28,6 +29,7 @@ class TaskViewModel @Inject constructor(
 
     init {
         loadTasks()
+        loadCompletedTasks()
     }
 
     private fun loadTasks() {
@@ -36,6 +38,16 @@ class TaskViewModel @Inject constructor(
                 _uiState.value = _uiState.value.copy(
                     activeTasks = tasks,
                     currentTask = tasks.firstOrNull()
+                )
+            }
+        }
+    }
+
+    private fun loadCompletedTasks() {
+        viewModelScope.launch {
+            repository.getCompletedTasks().collect { tasks ->
+                _uiState.value = _uiState.value.copy(
+                    completedTasks = tasks
                 )
             }
         }

@@ -11,6 +11,8 @@ class TaskRepository @Inject constructor(
     private val taskDao: TaskDao
 ) {
     fun getActiveTasks(): Flow<List<Task>> = taskDao.getActiveTasks()
+    
+    suspend fun getActiveTasksList(): List<Task> = taskDao.getActiveTasksList()
 
     fun getCompletedTasks(): Flow<List<Task>> = taskDao.getCompletedTasks()
 

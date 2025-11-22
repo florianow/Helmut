@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.helmut.data.local.AppDatabase
 import com.helmut.data.local.TaskDao
+import com.helmut.data.local.TemplateDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,11 +23,18 @@ object DatabaseModule {
             context,
             AppDatabase::class.java,
             "helmut_database"
-        ).build()
+        )
+        .fallbackToDestructiveMigration()
+        .build()
     }
 
     @Provides
     fun provideTaskDao(database: AppDatabase): TaskDao {
         return database.taskDao()
+    }
+    
+    @Provides
+    fun provideTemplateDao(database: AppDatabase): TemplateDao {
+        return database.templateDao()
     }
 }

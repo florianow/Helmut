@@ -38,33 +38,20 @@ fun TaskListScreen(
     var taskTitle by remember { mutableStateOf("") }
     var taskMinutes by remember { mutableStateOf("15") }
 
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text("Helmut") },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primary,
-                    titleContentColor = Color.White
-                )
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        TopAppBar(
+            title = { Text("Today") },
+            colors = TopAppBarDefaults.topAppBarColors(
+                containerColor = MaterialTheme.colorScheme.primary,
+                titleContentColor = Color.White
             )
-        },
-        floatingActionButton = {
-            FloatingActionButton(
-                onClick = { showAddTask = !showAddTask },
-                containerColor = MaterialTheme.colorScheme.primary
-            ) {
-                Icon(
-                    imageVector = if (showAddTask) Icons.Default.Close else Icons.Default.Add,
-                    contentDescription = "Add Task",
-                    tint = Color.White
-                )
-            }
-        }
-    ) { padding ->
+        )
+        
         Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(padding)
+            modifier = Modifier.weight(1f)
         ) {
             AnimatedVisibility(visible = showAddTask) {
                 Card(
@@ -165,6 +152,24 @@ fun TaskListScreen(
                         )
                     }
                 }
+            }
+        }
+        
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            contentAlignment = Alignment.BottomEnd
+        ) {
+            FloatingActionButton(
+                onClick = { showAddTask = !showAddTask },
+                containerColor = MaterialTheme.colorScheme.primary
+            ) {
+                Icon(
+                    imageVector = if (showAddTask) Icons.Default.Close else Icons.Default.Add,
+                    contentDescription = "Add Task",
+                    tint = Color.White
+                )
             }
         }
     }
