@@ -44,15 +44,15 @@ jobs:
 
     - name: Sign APK
       id: sign_apk
-      uses: r0adkll/sign-android-release@v1
       if: ${{ secrets.SIGNING_KEY != '' }}
+      continue-on-error: true
+      uses: r0adkll/sign-android-release@v1
       with:
         releaseDirectory: app/build/outputs/apk/release
         signingKeyBase64: ${{ secrets.SIGNING_KEY }}
         alias: ${{ secrets.SIGNING_ALIAS }}
         keyStorePassword: ${{ secrets.SIGNING_KEY_PASSWORD }}
         keyPassword: ${{ secrets.SIGNING_KEY_PASSWORD }}
-      continue-on-error: true
 
     - name: Rename APK
       run: |
