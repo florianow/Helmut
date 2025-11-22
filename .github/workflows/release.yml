@@ -42,25 +42,10 @@ jobs:
     - name: Build Release APK
       run: ./gradlew assembleRelease -x lint --stacktrace
 
-    - name: Sign APK
-      id: sign_apk
-      continue-on-error: true
-      uses: r0adkll/sign-android-release@v1
-      with:
-        releaseDirectory: app/build/outputs/apk/release
-        signingKeyBase64: ${{ secrets.SIGNING_KEY }}
-        alias: ${{ secrets.SIGNING_ALIAS }}
-        keyStorePassword: ${{ secrets.SIGNING_KEY_PASSWORD }}
-        keyPassword: ${{ secrets.SIGNING_KEY_PASSWORD }}
-
     - name: Rename APK
       run: |
         cd app/build/outputs/apk/release
-        if [ -f "app-release-signed.apk" ]; then
-          mv app-release-signed.apk helmut-${{ steps.version.outputs.VERSION }}-signed.apk
-        else
-          mv app-release-unsigned.apk helmut-${{ steps.version.outputs.VERSION }}-unsigned.apk
-        fi
+        mv app-release-unsigned.apk helmut-${{ steps.version.outputs.VERSION }}.apk
 
     - name: Upload Release APK
       uses: actions/upload-artifact@v4
