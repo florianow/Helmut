@@ -13,6 +13,11 @@
     <img src="https://img.shields.io/badge/Android-8.0%2B-green?logo=android" alt="Android 8.0+">
     <img src="https://img.shields.io/badge/Kotlin-1.9-blue?logo=kotlin" alt="Kotlin">
     <img src="https://img.shields.io/badge/License-MIT-yellow" alt="MIT License">
+    <img src="https://github.com/florianow/helmut/workflows/Android%20CI/badge.svg" alt="CI Status">
+  </p>
+  
+  <p>
+    <strong>Tested on:</strong> Pixel 9, Pixel 9 Pro, and all Android 8.0+ devices
   </p>
 </div>
 
@@ -55,7 +60,17 @@ Helmut helps you focus on one task at a time with visual countdown timers, custo
 
 ## Getting Started
 
-### Prerequisites
+### Download Pre-built APK
+
+The easiest way to try Helmut:
+
+1. Go to [Releases](https://github.com/florianow/helmut/releases)
+2. Download the latest `helmut-*.apk`
+3. Transfer to your Android device
+4. Enable "Install from Unknown Sources" in Settings
+5. Open the APK and install
+
+### Prerequisites (for building from source)
 
 - Android Studio (latest version recommended)
 - Android SDK 26+ (Android 8.0 Oreo or higher)
@@ -67,7 +82,7 @@ Helmut helps you focus on one task at a time with visual countdown timers, custo
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/helmut.git
+git clone https://github.com/florianow/helmut.git
 cd helmut
 ```
 
@@ -82,7 +97,7 @@ cd helmut
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/helmut.git
+git clone https://github.com/florianow/helmut.git
 cd helmut
 
 # Build the debug APK (using Android Studio's bundled JDK)
@@ -97,7 +112,7 @@ export JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home"
 
 ```cmd
 # Clone the repository
-git clone https://github.com/yourusername/helmut.git
+git clone https://github.com/florianow/helmut.git
 cd helmut
 
 # Build the debug APK
@@ -1275,7 +1290,7 @@ Contributions are welcome! Here's how you can help:
 - 📖 Improve documentation
 - 🐛 Fix bugs and improve performance
 
-Please read our [Code of Conduct](CODE_OF_CONDUCT.md) before contributing (TODO: add this file).
+Please read our [Contributing Guidelines](CONTRIBUTING.md) before contributing.
 
 ---
 

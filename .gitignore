@@ -93,3 +93,7 @@ lint-results.xml
 # Test results
 test-results/
 *.exec
+
+# Icon source folders (keep logo.png in root for README)
+android_icon_package/
+android_icon_package_new/
