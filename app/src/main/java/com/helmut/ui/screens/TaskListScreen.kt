@@ -1,4 +1,4 @@
-package com.eaddie.ui.screens
+package com.helmut.ui.screens
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
@@ -23,8 +23,8 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.eaddie.data.model.Task
-import com.eaddie.viewmodel.TaskViewModel
+import com.helmut.data.model.Task
+import com.helmut.viewmodel.TaskViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -41,7 +41,7 @@ fun TaskListScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Eaddie") },
+                title = { Text("Helmut") },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primary,
                     titleContentColor = Color.White
@@ -173,7 +173,7 @@ fun TaskListScreen(
 @Composable
 fun FocusCard(
     task: Task,
-    timerState: com.eaddie.utils.TimerState,
+    timerState: com.helmut.utils.TimerState,
     onPause: () -> Unit,
     onResume: () -> Unit,
     onComplete: () -> Unit,

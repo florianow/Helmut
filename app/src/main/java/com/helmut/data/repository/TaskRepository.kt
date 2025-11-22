@@ -1,7 +1,7 @@
-package com.eaddie.data.repository
+package com.helmut.data.repository
 
-import com.eaddie.data.local.TaskDao
-import com.eaddie.data.model.Task
+import com.helmut.data.local.TaskDao
+import com.helmut.data.model.Task
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import javax.inject.Singleton

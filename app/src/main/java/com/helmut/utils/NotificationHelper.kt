@@ -1,11 +1,11 @@
-package com.eaddie.utils
+package com.helmut.utils
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import com.eaddie.R
+import com.helmut.R
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -15,7 +15,7 @@ class NotificationHelper @Inject constructor(
     @ApplicationContext private val context: Context
 ) {
     companion object {
-        private const val CHANNEL_ID = "eaddie_timer_channel"
+        private const val CHANNEL_ID = "helmut_timer_channel"
         private const val NOTIFICATION_ID = 1
     }
 

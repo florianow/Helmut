@@ -1,4 +1,4 @@
-package com.eaddie.utils
+package com.helmut.utils
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job

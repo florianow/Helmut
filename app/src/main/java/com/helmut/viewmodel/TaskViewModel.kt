@@ -1,10 +1,10 @@
-package com.eaddie.viewmodel
+package com.helmut.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.eaddie.data.model.Task
-import com.eaddie.data.repository.TaskRepository
-import com.eaddie.utils.TimerManager
+import com.helmut.data.model.Task
+import com.helmut.data.repository.TaskRepository
+import com.helmut.utils.TimerManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch

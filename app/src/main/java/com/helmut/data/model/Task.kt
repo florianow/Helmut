@@ -1,4 +1,4 @@
-package com.eaddie.data.model
+package com.helmut.data.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

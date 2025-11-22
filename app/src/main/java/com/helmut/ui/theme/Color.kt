@@ -1,4 +1,4 @@
-package com.eaddie.ui.theme
+package com.helmut.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

@@ -1,7 +1,7 @@
-package com.eaddie
+package com.helmut
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-class EaddieApplication : Application()
+class HelmutApplication : Application()

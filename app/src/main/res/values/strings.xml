@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Eaddie</string>
+    <string name="app_name">Helmut</string>
     <string name="add_task">Add task</string>
     <string name="task_hint">What do you need to do?</string>
     <string name="time_hint">15m</string>
