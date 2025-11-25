@@ -230,8 +230,3 @@ private fun TaskInputRow(
         }
     }
 }
-
-private data class TaskInput(
-    val title: String,
-    val minutes: Int
-)

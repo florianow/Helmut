@@ -40,6 +40,12 @@ class TemplateViewModel @Inject constructor(
         }
     }
 
+    fun updateTemplate(template: Template, tasks: List<TemplateTask>) {
+        viewModelScope.launch {
+            templateRepository.updateTemplate(template, tasks)
+        }
+    }
+
     fun deleteTemplate(template: Template) {
         viewModelScope.launch {
             templateRepository.deleteTemplate(template)
