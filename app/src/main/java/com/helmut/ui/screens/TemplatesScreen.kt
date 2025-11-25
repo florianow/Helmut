@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.helmut.data.model.TemplateWithTasks
 import com.helmut.viewmodel.TemplateViewModel
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -24,14 +25,21 @@ fun TemplatesScreen(
     val templates by viewModel.templates.collectAsState()
     var showCreateDialog by remember { mutableStateOf(false) }
     var editingTemplate by remember { mutableStateOf<TemplateWithTasks?>(null) }
+    val snackbarHostState = remember { SnackbarHostState() }
+    val scope = rememberCoroutineScope()
     
     LaunchedEffect(Unit) {
         viewModel.initializeDefaultTemplates()
     }
 
-    Column(
-        modifier = Modifier.fillMaxSize()
-    ) {
+    Scaffold(
+        snackbarHost = { SnackbarHost(snackbarHostState) }
+    ) { paddingValues ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues)
+        ) {
         TopAppBar(
             title = { Text("Templates") },
             colors = TopAppBarDefaults.topAppBarColors(
@@ -73,7 +81,15 @@ fun TemplatesScreen(
                     items(templates) { template ->
                         TemplateCard(
                             template = template,
-                            onAddToToday = { viewModel.addTemplateToToday(template) },
+                            onAddToToday = { 
+                                viewModel.addTemplateToToday(template)
+                                scope.launch {
+                                    snackbarHostState.showSnackbar(
+                                        message = "${template.tasks.size} tasks added to today",
+                                        duration = SnackbarDuration.Short
+                                    )
+                                }
+                            },
                             onEdit = { editingTemplate = template },
                             onDelete = { viewModel.deleteTemplate(template.template) }
                         )
@@ -98,6 +114,7 @@ fun TemplatesScreen(
                     tint = Color.White
                 )
             }
+        }
         }
     }
     
