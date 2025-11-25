@@ -23,6 +23,7 @@ fun TemplatesScreen(
 ) {
     val templates by viewModel.templates.collectAsState()
     var showCreateDialog by remember { mutableStateOf(false) }
+    var editingTemplate by remember { mutableStateOf<TemplateWithTasks?>(null) }
     
     LaunchedEffect(Unit) {
         viewModel.initializeDefaultTemplates()
@@ -73,6 +74,7 @@ fun TemplatesScreen(
                         TemplateCard(
                             template = template,
                             onAddToToday = { viewModel.addTemplateToToday(template) },
+                            onEdit = { editingTemplate = template },
                             onDelete = { viewModel.deleteTemplate(template.template) }
                         )
                     }
@@ -108,12 +110,31 @@ fun TemplatesScreen(
             }
         )
     }
+    
+    editingTemplate?.let { template ->
+        EditTemplateDialog(
+            templateWithTasks = template,
+            onDismiss = { editingTemplate = null },
+            onUpdate = { name, description, icon, tasks ->
+                viewModel.updateTemplate(
+                    template.template.copy(
+                        name = name,
+                        description = description,
+                        icon = icon
+                    ),
+                    tasks
+                )
+                editingTemplate = null
+            }
+        )
+    }
 }
 
 @Composable
 fun TemplateCard(
     template: TemplateWithTasks,
     onAddToToday: () -> Unit,
+    onEdit: () -> Unit,
     onDelete: () -> Unit
 ) {
     var showDeleteDialog by remember { mutableStateOf(false) }
@@ -156,12 +177,22 @@ fun TemplateCard(
                     }
                 }
                 
-                IconButton(onClick = { showDeleteDialog = true }) {
-                    Icon(
-                        imageVector = Icons.Default.Delete,
-                        contentDescription = "Delete Template",
-                        tint = MaterialTheme.colorScheme.error
-                    )
+                Row {
+                    IconButton(onClick = onEdit) {
+                        Icon(
+                            imageVector = Icons.Default.Edit,
+                            contentDescription = "Edit Template",
+                            tint = MaterialTheme.colorScheme.primary
+                        )
+                    }
+                    
+                    IconButton(onClick = { showDeleteDialog = true }) {
+                        Icon(
+                            imageVector = Icons.Default.Delete,
+                            contentDescription = "Delete Template",
+                            tint = MaterialTheme.colorScheme.error
+                        )
+                    }
                 }
             }
             
