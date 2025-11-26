@@ -4,6 +4,14 @@
         <item name="android:statusBarColor">@color/purple_700</item>
     </style>
     
+    <style name="Theme.Helmut.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/splash_background_color</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/splash_logo</item>
+        <item name="windowSplashScreenAnimationDuration">500</item>
+        <item name="postSplashScreenTheme">@style/Theme.Helmut</item>
+    </style>
+    
+    <color name="splash_background_color">#FFF5E6D3</color>
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
