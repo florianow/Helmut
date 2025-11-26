@@ -32,7 +32,7 @@ fun TaskListScreen(
     viewModel: TaskViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
-    val timerState by viewModel.timerManager.timerState.collectAsState()
+    val timerState by viewModel.timerState.collectAsState()
     
     var showAddTask by remember { mutableStateOf(false) }
     var taskTitle by remember { mutableStateOf("") }
@@ -120,8 +120,7 @@ fun TaskListScreen(
                     onPause = { viewModel.pauseTimer() },
                     onResume = { viewModel.resumeTimer() },
                     onComplete = { viewModel.completeTask(uiState.currentTask!!) },
-                    onSkip = { viewModel.skipTask() },
-                    formatTime = { viewModel.timerManager.formatTime(it) }
+                    onSkip = { viewModel.skipTask() }
                 )
             }
 
@@ -182,9 +181,14 @@ fun FocusCard(
     onPause: () -> Unit,
     onResume: () -> Unit,
     onComplete: () -> Unit,
-    onSkip: () -> Unit,
-    formatTime: (Int) -> String
+    onSkip: () -> Unit
 ) {
+    fun formatTime(seconds: Int): String {
+        val minutes = seconds / 60
+        val remainingSeconds = seconds % 60
+        return String.format("%02d:%02d", minutes, remainingSeconds)
+    }
+    
     Card(
         modifier = Modifier
             .fillMaxWidth()
